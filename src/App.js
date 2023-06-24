@@ -6,9 +6,6 @@ import {Home,PostDetails, CreatePost,Navbar} from './modules'
 
 
 function App() {
-
-
-
   
   return (
     <div className="App">
@@ -19,9 +16,6 @@ function App() {
         <Route path='/post-details/:postId' element={<PostDetails/>}></Route>
         <Route path='/create-post' element={<CreatePost/>} />
       </Routes>
-
-
-
     </div>
   );
 }

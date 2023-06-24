@@ -10,6 +10,8 @@ export function CreatePost(){
     // const [subtitle, setSubtitle] = useState();
     // const [content, setContent] = useState();
 
+
+    // Created Custom Hook for generic based usage of useState for title, subtitle and content.
     const title = useFormCustom()
     const subtitle = useFormCustom()
     const content = useFormCustom() 
@@ -18,6 +20,8 @@ export function CreatePost(){
         console.log(title,subtitle,content);
 
         try{
+
+            // add post to firestore
             Firestore
             .collection("Posts")
             .add({
@@ -33,6 +37,7 @@ export function CreatePost(){
         
         console.log('added!')
 
+        // Clearing the values for better UI Experience -- CSS Pending -- 
 
         document.getElementById('title').value = ''
         document.getElementById('subtitle').value = ''
@@ -41,9 +46,10 @@ export function CreatePost(){
     }
     return(
         <div> 
+
+            {/*  {...title} returns value and the onChange function which indirectly calls setValue of useState */}
             <label for="title">Title : </label>
             <input type="text" {...title}  id="title"/>
-
             <label for="subtitle" >Sub Title : </label>
             <input type="text" id="subtitle" {...subtitle} />
             <label for="content">Content : </label>
