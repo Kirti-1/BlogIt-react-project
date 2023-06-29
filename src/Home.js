@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { Firestore } from "./firebase";
 
@@ -9,8 +9,9 @@ export function Home(){
     var [listItem, setListItem] = useState([])
    
 
-    
-    Firestore.collection('Posts').onSnapshot((snapshot) => {
+
+    var token = useRef('false');
+    const getDbData = () => {Firestore.collection('Posts').onSnapshot((snapshot) => {
               
         const list = snapshot.docs.map((doc) => {
             let data = doc.data();
@@ -23,8 +24,14 @@ export function Home(){
         });
         setListItem(list);
         // console.log(list);
+        token.current = 'true';
          
     });
+    }
+    if(token.current === 'false'){
+        console.log(getDbData())
+    }
+    console.log(token);
 
     const navigate = useNavigate();
     const handleViewDetails = (id) => {
@@ -38,10 +45,27 @@ export function Home(){
             listItem.map((l)=>{
                 // Blog post card with title, subtitle and content.
                 return (
-                    <div key={l.key}>
-                        <h1>{l.title}</h1>
+                    <div key={l.key} style={{textAlign:'left', width:'50%', marginLeft:'50px'}}>
+                        {/* <h1>{l.title}</h1>
                         <h4>{l.subtitle}</h4>
-                        <button onClick={() => handleViewDetails(l.key)}>View Details</button>
+                        <button onClick={() => handleViewDetails(l.key)}>View Details</button> */}
+
+
+                        {/* making it a card */}
+                        <div className="card">
+                        <h5 className="card-header">{l.title}</h5>
+                        <div className="card-body">
+                            <h5 className="card-title">{l.subtitle}</h5>
+                            <button style={{}} className="btn btn-primary" onClick={() => handleViewDetails(l.key)}>View Details</button>
+                        </div>
+                        </div>
+
+
+
+
+                        <br/>
+
+
                     </div>)
             })
 

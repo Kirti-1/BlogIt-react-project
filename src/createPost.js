@@ -48,13 +48,26 @@ export function CreatePost(){
         <div> 
 
             {/*  {...title} returns value and the onChange function which indirectly calls setValue of useState */}
-            <label for="title">Title : </label>
-            <input type="text" {...title}  id="title"/>
-            <label for="subtitle" >Sub Title : </label>
-            <input type="text" id="subtitle" {...subtitle} />
-            <label for="content">Content : </label>
-            <textarea id="content" {...content}></textarea>
-            <button type="submit" onClick={handleSubmit}>Submit</button>
+            <form style={{width:'80%', textAlign:'left',marginLeft:'50px'}}>
+                <div className="form-group">
+                    <label for="title">Title : </label>
+                    <input class="form-control" type="text" {...title}  id="title"/>
+                </div>
+
+                <div className="form-group">
+                    <label for="subtitle" >Sub Title : </label>
+                    <input class="form-control" type="text" id="subtitle" {...subtitle} />
+                </div>
+
+                <div className="form-group">
+                    <label for="content">Content : </label>
+                    <textarea style={{height:'20em'}} class="form-control" id="content" {...content}></textarea>
+                </div>
+            
+            
+            
+                <button style={{marginLeft:'50%', marginTop:'30px'}} type="submit" onClick={handleSubmit}>Submit</button>
+            </form>
         </div>
     );
 }
