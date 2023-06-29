@@ -19,8 +19,10 @@ export function CreatePost(){
     const handleSubmit = () => {
         console.log(title,subtitle,content);
 
-        try{
 
+        console.log(title.val,subtitle.val,content.val);
+
+        
             // add post to firestore
             Firestore
             .collection("Posts")
@@ -30,9 +32,7 @@ export function CreatePost(){
                 content:content.val,
                 createdDateTime:new Date()
             });
-        }catch(e){
-            console.log(e);
-        }
+      
         
         
         console.log('added!')
@@ -48,26 +48,26 @@ export function CreatePost(){
         <div> 
 
             {/*  {...title} returns value and the onChange function which indirectly calls setValue of useState */}
-            <form style={{width:'80%', textAlign:'left',marginLeft:'50px'}}>
+            <div style={{width:'80%', textAlign:'left',marginLeft:'50px'}}>
                 <div className="form-group">
-                    <label for="title">Title : </label>
-                    <input class="form-control" type="text" {...title}  id="title"/>
+                    <label htmlFor="title">Title : </label>
+                    <input className="form-control" type="text" {...title}  id="title"/>
                 </div>
 
                 <div className="form-group">
-                    <label for="subtitle" >Sub Title : </label>
-                    <input class="form-control" type="text" id="subtitle" {...subtitle} />
+                    <label htmlFor="subtitle" >Sub Title : </label>
+                    <input className="form-control" type="text" id="subtitle" {...subtitle} />
                 </div>
 
                 <div className="form-group">
-                    <label for="content">Content : </label>
-                    <textarea style={{height:'20em'}} class="form-control" id="content" {...content}></textarea>
+                    <label htmlFor="content">Content : </label>
+                    <textarea style={{height:'20em'}} className="form-control" id="content" {...content}></textarea>
                 </div>
             
             
             
                 <button style={{marginLeft:'50%', marginTop:'30px'}} type="submit" onClick={handleSubmit}>Submit</button>
-            </form>
+            </div>
         </div>
     );
 }
